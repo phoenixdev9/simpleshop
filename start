@@ -1,0 +1,14 @@
+1. dotnet new sln
+2. dotnet new webapi -o api
+//Then add Projects
+3. dotnet new classlib -o Infrastructure
+4. dotnet new classlib -o Domains
+//Then add project to the solution file
+1. dotnet sln add api
+2. dotnet sln add Infrastructure
+3. dotnet sln add Domains
+//Add Dependencies
+1. cd API && dotnet add reference ../Infrastructure
+2. cd Infrastructure && dotnet add reference ../Domains
+//Lastly
+1. dotnet restore
