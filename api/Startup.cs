@@ -1,3 +1,6 @@
+using api.Utils;
+using AutoMapper;
+using Domains.IRepo;
 using Domains.Repo;
 using Infrastructure.Data;
 using Infrastructure.Data.Repo;
@@ -23,7 +26,10 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped(typeof(IGenericsRepo<>), (typeof(GenericsRepo<>)));
             services.AddControllers();
+            //Add Auto Mapper
+            services.AddAutoMapper(typeof(AutoMapping));
             //Add DB
             services.AddDbContext<StoreContext>(x =>
                x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));

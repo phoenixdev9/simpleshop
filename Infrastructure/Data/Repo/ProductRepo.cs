@@ -1,5 +1,7 @@
+using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domains.Entities;
 using Domains.Repo;
@@ -15,19 +17,18 @@ namespace Infrastructure.Data.Repo
         {
             _context = context;
         }
-
+        public IQueryable<Product> GetProductsList()
+        {
+            return _context.Products.Include(x => x.ProductBrand).Include(x => x.ProductType).AsQueryable();
+        }
         public async Task<Product> GetProductById(Guid Id)
         {
-            return await _context.Products.FirstOrDefaultAsync(x => x.Id == Id);
+            return await GetProductsList().FirstOrDefaultAsync(x => x.Id == Id);
         }
-        // public async Task<Product> CreateProduct(InputCreateProductDTO data)
-        // {
-        //     return await _context.Products.FirstOrDefaultAsync(x => x.Id == Id);
-        // }
 
         public async Task<IReadOnlyList<Product>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await GetProductsList().ToListAsync();
         }
 
     }
