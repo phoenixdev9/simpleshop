@@ -1,35 +1,43 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Domains.Entities;
-using Infrastructure.Data;
+using Domains.Repo;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace api.Controllers {
+namespace api.Controllers
+{
     [ApiController]
-    [Route ("[controller]")]
-    public class ProductController : ControllerBase {
+    [Route("[controller]")]
+    public class ProductController : ControllerBase
+    {
         private readonly ILogger<ProductController> _logger;
-        private readonly StoreContext _context;
+        private readonly IProductRepo _productRepo;
 
-        public ProductController (ILogger<ProductController> logger, StoreContext context) {
-            _context = context;
+        public ProductController(ILogger<ProductController> logger, IProductRepo productRepo)
+        {
+            _productRepo = productRepo;
             _logger = logger;
 
         }
 
         [HttpPost]
-        public string CreateProduct () {
-            _context.Products.Add (new Product { Name = "Hello" });
-            _context.SaveChanges ();
+        public string CreateProduct()
+        {
             return "Good";
         }
 
         [HttpGet]
-        public ICollection<Product> GetProduct () {
-            return _context.Products.ToList ();
-
+        public async Task<ActionResult<List<Product>>> GetProduct()
+        {
+            return Ok(await _productRepo.GetProducts());
         }
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<Product>> GetProductById(Guid Id)
+        {
+            return Ok(await _productRepo.GetProductById(Id));
+        }
+
     }
 }
