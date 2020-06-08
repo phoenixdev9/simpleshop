@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using api.DTO;
+using api.Utils;
 using AutoMapper;
 using Domains.Entities;
 using Domains.IRepo;
+using Domains.Params;
 using Domains.Repo;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
 {
@@ -34,9 +35,13 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ReturnProductDTO>>> GetProduct()
+        public async Task<ActionResult<Pagination<ReturnProductDTO>>> GetProduct([FromQuery] GetProductParams getProductParams)
         {
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ReturnProductDTO>>(await _productRepo.GetProducts()));
+            var listProducts = await _productRepo.GetProducts(getProductParams);
+
+            var returnList = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ReturnProductDTO>>(listProducts);
+            Response.AddPagination(listProducts.CurrentPage, listProducts.PageSize, listProducts.TotalCount, listProducts.TotalPages);
+            return Ok(returnList);
         }
 
         [HttpGet("brand")]
