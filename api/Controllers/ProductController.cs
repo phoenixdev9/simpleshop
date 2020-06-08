@@ -11,9 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly IGenericsRepo<ProductType> _productTypes;
         private readonly IProductRepo _productRepo;
