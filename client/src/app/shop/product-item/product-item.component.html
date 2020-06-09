@@ -9,8 +9,10 @@
       <button
         (click)="addItemToBasket()"
         type="button"
-        class="btn btn-primary fa fa-shopping-cart mr-2"
-      ></button>
+        class="btn btn-warning mr-2"
+      >
+        Add to Cart
+      </button>
       <button
         routerLink="/shop/{{ product.id }}"
         type="button"
@@ -20,7 +22,6 @@
       </button>
     </div>
   </div>
-
   <div class="card-body d-flex flex-column">
     <a routerLink="/shop/{{ product.id }}">
       <h6 class="text-uppercase">{{ product.name }}</h6>
