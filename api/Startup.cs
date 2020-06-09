@@ -1,69 +1,57 @@
-using System.Linq;
-using api.Error;
 using api.Extensions;
 using api.Middleware;
 using api.Utils;
 using AutoMapper;
-using Domains.IRepo;
-using Domains.Repo;
 using Infrastructure.Data;
-using Infrastructure.Data.Repo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
-namespace api
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace api {
+    public class Startup {
+        public Startup (IConfiguration configuration) {
             _Configuration = configuration;
         }
 
         private readonly IConfiguration _Configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
+        public void ConfigureServices (IServiceCollection services) {
+            services.AddControllers ();
             //Add Auto Mapper
-            services.AddAutoMapper(typeof(AutoMapping));
+            services.AddAutoMapper (typeof (AutoMapping));
             //Add DB
-            services.AddDbContext<StoreContext>(x =>
-               x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<StoreContext> (x =>
+                x.UseSqlite (_Configuration.GetConnectionString ("DefaultConnection")));
             //Add Extension for dependency injections
-            services.AddApplicationServices();
-            services.AddCors(opt =>
-            {
-                opt.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
-                });
-            });
+            services.AddApplicationServices ();
+            //Add Cors
+            services.AddCors (o => o.AddPolicy ("CorsPolicy", builder => {
+                builder
+                    .AllowAnyMethod ()
+                    .AllowAnyHeader ()
+                    .AllowCredentials ()
+                    .WithOrigins ("http://localhost:4200");
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
             // if (env.IsDevelopment())
             // {
             //     app.UseDeveloperExceptionPage();
             // }
-            app.UseMiddleware<ExceptionMiddleware>();
-            app.UseStatusCodePagesWithReExecute("/errors/{0}");
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseCors("CorsPolicy");
-            app.UseAuthorization();
+            app.UseMiddleware<ExceptionMiddleware> ();
+            app.UseStatusCodePagesWithReExecute ("/errors/{0}");
+            app.UseHttpsRedirection ();
+            app.UseRouting ();
+            app.UseCors ("CorsPolicy");
+            app.UseAuthorization ();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+            app.UseEndpoints (endpoints => {
+                endpoints.MapControllers ();
             });
         }
     }
