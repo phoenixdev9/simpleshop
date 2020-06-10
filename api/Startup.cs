@@ -3,11 +3,13 @@ using api.Middleware;
 using api.Utils;
 using AutoMapper;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace api {
     public class Startup {
@@ -25,6 +27,11 @@ namespace api {
             //Add DB
             services.AddDbContext<StoreContext> (x =>
                 x.UseSqlite (_Configuration.GetConnectionString ("DefaultConnection")));
+            // services.AddSingleton<IConnectionMultiplexer> (c => {
+            //     var configuration = ConfigurationOptions.Parse (_Configuration
+            //         .GetConnectionString ("Redis"), true);
+            //     return ConnectionMultiplexer.Connect (configuration);
+            // });
             //Add Extension for dependency injections
             services.AddApplicationServices ();
             //Add Cors
@@ -35,6 +42,10 @@ namespace api {
                     .AllowCredentials ()
                     .WithOrigins ("http://localhost:4200");
             }));
+            //Add User DB
+            services.AddDbContext<AppIdentityDbContext> (x => {
+                x.UseSqlite (_Configuration.GetConnectionString ("IdentityConnection"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
