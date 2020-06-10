@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './interceptors/loading.interceptors';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -12,7 +13,7 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +26,14 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     NotfoundComponent,
     ServerErrorComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    NgxSpinnerModule,
+    AppRoutingModule,
+    HttpClientModule,
+  ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

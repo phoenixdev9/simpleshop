@@ -8,7 +8,7 @@
     "cc": "ng g c serverError",
     "gi": "ng g i _model/Photo --skip-tests --flat ",
     "ccc": "ng g c components/pager --skip-tests --flat ",
-    "cs": "ng g s _services/products --skip-tests --flat ",
+    "cs": "ng g s _services/busy ",
     "cm": "ng g m app-routing --flat --module=app",
     "cg": "ng g guard _guard/adminGuard --skip-tests --flat ",
     "cp": "ng g pipe _pipe/truncatePipe --skip-tests --flat ",
@@ -27,6 +27,7 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "ngx-spinner": "^9.0.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
