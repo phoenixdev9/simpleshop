@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Domains.Entities;
+using Microsoft.AspNetCore.Identity;
 // using Core.Entities;
 // using Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace Infrastructure.Data
 {
     public class StoreContextSeed
     {
-        public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
+        public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory, UserManager<User> userManager)
         {
             var path = "../Infrastructure/Data/SeedData/";
             try
@@ -60,6 +61,26 @@ namespace Infrastructure.Data
                     }
 
                     await context.SaveChangesAsync();
+                }
+                if (!userManager.Users.Any())
+                {
+                    var user = new User
+                    {
+                        DisplayName = "Bob",
+                        Email = "bob@test.com",
+                        UserName = "bob@test.com",
+                        address = new Address
+                        {
+                            FirstName = "Bob",
+                            LastName = "Bobbity",
+                            Street = "104st 41a ave",
+                            City = "Vancouver",
+                            Province = "BC",
+                            PostalCode = "V1N4L3"
+                        }
+                    };
+
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
 
                 // if (!context.DeliveryMethods.Any())

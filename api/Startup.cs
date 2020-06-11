@@ -4,7 +4,6 @@ using api.Utils;
 using API.Extensions;
 using AutoMapper;
 using Infrastructure.Data;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,56 +11,62 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 
-namespace api {
-    public class Startup {
-        public Startup (IConfiguration configuration) {
+namespace api
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
             _Configuration = configuration;
         }
 
         private readonly IConfiguration _Configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
-            services.AddControllers ();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
             //Add Auto Mapper
-            services.AddAutoMapper (typeof (AutoMapping));
+            services.AddAutoMapper(typeof(AutoMapping));
             //Add DB
-            services.AddDbContext<StoreContext> (x =>
-                x.UseSqlite (_Configuration.GetConnectionString ("DefaultConnection")));
+            services.AddDbContext<StoreContext>(x =>
+               x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
             // services.AddSingleton<IConnectionMultiplexer> (c => {
             //     var configuration = ConfigurationOptions.Parse (_Configuration
             //         .GetConnectionString ("Redis"), true);
             //     return ConnectionMultiplexer.Connect (configuration);
             // });
             //Add Extension for dependency injections
-            services.AddApplicationServices ();
+            services.AddApplicationServices();
             //Add Cors
-            services.AddCors (o => o.AddPolicy ("CorsPolicy", builder => {
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
                 builder
-                    .AllowAnyMethod ()
-                    .AllowAnyHeader ()
-                    .AllowCredentials ()
-                    .WithOrigins ("http://localhost:4200");
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithOrigins("http://localhost:4200");
             }));
-            //Add User DB
-            services.AddDbContext<AppIdentityDbContext> (x => {
-                x.UseSqlite (_Configuration.GetConnectionString ("IdentityConnection"));
-            });
+            // //Add User DB
+            // services.AddDbContext<AppIdentityDbContext> (x => {
+            //     x.UseSqlite (_Configuration.GetConnectionString ("IdentityConnection"));
+            // });
 
             //Add Identity Services
-            services.AddIdentityServices (_Configuration);
+            services.AddIdentityServices(_Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             // if (env.IsDevelopment())
             // {
             //     app.UseDeveloperExceptionPage();
             // }
-            app.UseMiddleware<ExceptionMiddleware> ();
-            app.UseStatusCodePagesWithReExecute ("/errors/{0}");
-            app.UseHttpsRedirection ();
-            app.UseRouting ();
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            app.UseHttpsRedirection();
+            app.UseRouting();
             /**
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
@@ -71,12 +76,13 @@ namespace api {
                 ), RequestPath = "/content"
             });
             */
-            app.UseCors ("CorsPolicy");
-            app.UseAuthentication ();
-            app.UseAuthorization ();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseEndpoints (endpoints => {
-                endpoints.MapControllers ();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
             });
             /**
             

@@ -2,18 +2,20 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Domains.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 //cd .. && dotnet ef migrations add InitialCreate -p Infrastructure -s api -o Data/Migrations
 //dotnet ef database update
 namespace Infrastructure.Data
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext<User>
     {
-        public StoreContext(DbContextOptions<StoreContext> options) : base(options) { }
+        public StoreContext(DbContextOptions options) : base(options) { }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
