@@ -1,0 +1,93 @@
+<div class="signup">
+  <h3>Sign up</h3>
+  <hr />
+  <form [formGroup]="signUpForm" (ngSubmit)="submitFunc()">
+    <!-- Basic -->
+    <div class="mb-3">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        [ngClass]="{
+          'is-invalid':
+            signUpForm.get('name').errors && signUpForm.get('name').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter a valid name
+      </div>
+    </div>
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        [ngClass]="{
+          'is-invalid':
+            signUpForm.get('email').errors && signUpForm.get('email').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter a valid email address.
+      </div>
+    </div>
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        formControlName="password"
+        [ngClass]="{
+          'is-invalid':
+            signUpForm.get('password').errors &&
+            signUpForm.get('password').touched
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          signUpForm.get('password').hasError('required') &&
+          signUpForm.get('password').touched
+        "
+      >
+        Password is required
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          signUpForm.get('password').hasError('minlength') &&
+          signUpForm.get('password').touched
+        "
+      >
+        Password must be at least 8 characters
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          signUpForm.get('password').hasError('maxlength') &&
+          signUpForm.get('password').touched
+        "
+      >
+        Password cannot exceed 15 characters
+      </div>
+      <!-- Error Messages -->
+    </div>
+    <hr class="mb-4" />
+    <button
+      style="background-color: #5bb462;"
+      class="btn btn-lg btn-block"
+      [disabled]="!signUpForm.valid"
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>

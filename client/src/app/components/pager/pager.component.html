@@ -1,4 +1,4 @@
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example" *ngIf="totalPages > 1">
   <ul class="pagination justify-content-end">
     <li class="page-item" [ngClass]="{ disabled: pageNumber === 1 }">
       <a class="page-link" (click)="onPagerChange(pageNumber - 1)">Previous</a>

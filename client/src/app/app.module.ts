@@ -14,6 +14,14 @@ import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { InfoComponent } from './components/info/info.component';
+import { JwtInterceptor } from './interceptors/JWTInterceptor';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderComponent } from './order/order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,16 +33,25 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ProductDetailComponent,
     NotfoundComponent,
     ServerErrorComponent,
+    InfoComponent,
+    LoginComponent,
+    RegisterComponent,
+    CheckoutComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgxSpinnerModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

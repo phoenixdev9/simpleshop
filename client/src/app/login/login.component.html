@@ -1,0 +1,51 @@
+<div class="main">
+  <h3>Login</h3>
+  <hr />
+  <form (ngSubmit)="submitFunc(form, $event)" #form="ngForm">
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        required
+        [pattern]="emailOnly"
+        name="email"
+        ngModel
+        #email="ngModel"
+        [ngClass]="{
+          'is-invalid': isValidateTextFalse(email)
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter a valid email address.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        required
+        name="password"
+        ngModel
+        #password="ngModel"
+        [ngClass]="{
+          'is-invalid': isValidateTextFalse(password)
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter a password
+      </div>
+    </div>
+    <br />
+    <button
+      class="btn btn-success btn-lg btn-block"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      Log in
+    </button>
+  </form>
+</div>
