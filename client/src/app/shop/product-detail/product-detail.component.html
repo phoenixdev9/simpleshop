@@ -26,7 +26,10 @@
           style="cursor: pointer; font-size: 2em;"
         ></i>
       </div>
-      <button (click)="addItemToBasket()" class="btn btn-warning btn-lg mt-5">
+      <button
+        (click)="addItemToBasket(product.id)"
+        class="btn btn-warning btn-lg mt-5"
+      >
         Add to Cart
       </button>
     </div>

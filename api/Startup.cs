@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StackExchange.Redis;
 
 namespace api
 {
@@ -31,11 +30,6 @@ namespace api
             //Add DB
             services.AddDbContext<StoreContext>(x =>
                x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
-            // services.AddSingleton<IConnectionMultiplexer> (c => {
-            //     var configuration = ConfigurationOptions.Parse (_Configuration
-            //         .GetConnectionString ("Redis"), true);
-            //     return ConnectionMultiplexer.Connect (configuration);
-            // });
             //Add Extension for dependency injections
             services.AddApplicationServices();
             //Add Cors
@@ -64,8 +58,8 @@ namespace api
             //     app.UseDeveloperExceptionPage();
             // }
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseStatusCodePagesWithReExecute("/errors/{0}");
-            app.UseHttpsRedirection();
+            // app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            // app.UseHttpsRedirection();
             app.UseRouting();
             /**
             app.UseStaticFiles();
@@ -88,7 +82,6 @@ namespace api
             
 
             
-            app.UseAuthorization();
 
             app.UseSwaggerDocumention();
 

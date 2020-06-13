@@ -1,5 +1,7 @@
+import { AccountService } from './../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,10 +10,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   signUpForm: FormGroup;
+  returnUrl: string;
+  constructor(
+    private as: AccountService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl ?? '/';
+  }
   private readonly emailOnly = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      displayName: new FormControl('', [Validators.required]),
       email: new FormControl('', [
         Validators.pattern(this.emailOnly),
         Validators.required,
@@ -24,6 +34,13 @@ export class RegisterComponent implements OnInit {
     });
   }
   submitFunc() {
-    console.log('this.signUpForm.value', this.signUpForm.value);
+    this.as.register(this.signUpForm.value).subscribe(
+      () => {
+        this.router.navigateByUrl(this.returnUrl);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

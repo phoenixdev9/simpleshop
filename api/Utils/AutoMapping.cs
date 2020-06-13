@@ -14,8 +14,10 @@ namespace api.Utils
             CreateMap<AddressDTO, Address>();
             CreateMap<Address, AddressDTO>();
             CreateMap<BasketItem, ReturnBasket>()
+                .ForMember(d => d.Price, o => o.MapFrom(s => s.Product.Price))
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.Product.Name))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.Product.PictureUrl));
+            CreateMap<Order, OrderReturnDTO>();
         }
     }
 }

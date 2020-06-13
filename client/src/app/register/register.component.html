@@ -4,15 +4,16 @@
   <form [formGroup]="signUpForm" (ngSubmit)="submitFunc()">
     <!-- Basic -->
     <div class="mb-3">
-      <label for="name">Name</label>
+      <label for="displayName">Name</label>
       <input
         type="text"
         class="form-control"
-        id="name"
-        formControlName="name"
+        id="displayName"
+        formControlName="displayName"
         [ngClass]="{
           'is-invalid':
-            signUpForm.get('name').errors && signUpForm.get('name').touched
+            signUpForm.get('displayName').errors &&
+            signUpForm.get('displayName').touched
         }"
       />
       <div class="invalid-feedback">

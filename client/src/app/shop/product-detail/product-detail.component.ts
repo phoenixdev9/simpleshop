@@ -1,7 +1,12 @@
+import {
+  _checkItemExistsInCart,
+  _findItemExistsInCart,
+} from './../../_utils/_checkItemExistsInCart';
 import { ProductsService } from './../../_services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/_models/IProduct';
 import { ActivatedRoute } from '@angular/router';
+import { BasketService } from 'src/app/_services/basket.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,34 +18,46 @@ export class ProductDetailComponent implements OnInit {
   quantity = 1;
   constructor(
     private shopService: ProductsService,
-    private activateRoute: ActivatedRoute // private bcService: BreadcrumbService, // private basketService: BasketService
-  ) {
-    // this.bcService.set('@productDetails', '');
-  }
-  addItemToBasket() {
-    // this.basketService.addItemToBasket(this.product, this.quantity);
+    private activateRoute: ActivatedRoute,
+    private basketService: BasketService
+  ) {}
+  addItemToBasket(id: string) {
+    this.basketService
+      .editBasket({ ProductId: id, Quantity: this.quantity })
+      .subscribe(
+        () => {
+          this.loadProduct();
+        },
+        (err) => console.log(err)
+      );
   }
 
   incrementQuantity() {
-    // this.quantity++;
+    this.quantity++;
   }
 
   decrementQuantity() {
-    // if (this.quantity > 1) {
-    //   this.quantity--;
-    // }
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
   }
   ngOnInit() {
     this.loadProduct();
+  }
+  checkProduct() {
+    const cart = this.basketService.getCurrentBasketValue()?.cart;
+    const item = _findItemExistsInCart(cart, this.product?.id);
+    if (item) {
+      this.quantity = item.quantity;
+    }
   }
   loadProduct() {
     this.shopService
       .getProduct(this.activateRoute.snapshot.paramMap.get('id'))
       .subscribe(
         (product) => {
-          console.log('product', product);
           this.product = product;
-          // this.bcService.set('@productDetails', product.name);
+          this.checkProduct();
         },
         (error) => {
           console.log(error);

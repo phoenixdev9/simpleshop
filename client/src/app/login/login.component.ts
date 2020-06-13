@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
+  returnUrl: string;
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl ?? '/';
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
   }
 
   readonly emailOnly = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
   submitFunc(data: any, event: Event) {
     event.preventDefault();
-    console.log('data.value');
     this.accountService.login(data.value).subscribe(
       () => {
         this.router.navigateByUrl(this.returnUrl);

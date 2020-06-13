@@ -3,10 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace api.DTO {
     public class AddressDTO {
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public string Street { get; set; }
@@ -16,6 +13,9 @@ namespace api.DTO {
 
         [Required]
         public string Province { get; set; }
+
+        [Required]
+        public string Country { get; set; }
 
         [Required]
         public string PostalCode { get; set; }

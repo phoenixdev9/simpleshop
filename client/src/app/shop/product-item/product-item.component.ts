@@ -1,5 +1,9 @@
+import { _checkItemExistsInCart } from './../../_utils/_checkItemExistsInCart';
 import { Component, OnInit, Input } from '@angular/core';
 import { IProduct } from 'src/app/_models/IProduct';
+import { BasketService } from 'src/app/_services/basket.service';
+import { Observable } from 'rxjs';
+import { IBasketItem, IBasket } from 'src/app/_models/IBasket';
 
 @Component({
   selector: 'app-product-item',
@@ -8,7 +12,34 @@ import { IProduct } from 'src/app/_models/IProduct';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: IProduct;
-  constructor() {}
-  addItemToBasket() {}
-  ngOnInit(): void {}
+  isContains: boolean = false;
+  constructor(private BasketService: BasketService) {}
+  checkItemExistsInCart(b: IBasketItem[]) {
+    this.isContains = _checkItemExistsInCart(b, this.product.id);
+  }
+  addItemToBasket(id: string) {
+    this.BasketService.editBasket({
+      ProductId: id,
+      Quantity: 1,
+    }).subscribe(
+      (e: IBasketItem[]) => {
+        this.checkItemExistsInCart(e);
+      },
+      (err) => console.log(err)
+    );
+  }
+  removeItemFromBasket(id: string) {
+    this.BasketService.removeItemFromBasket(id).subscribe(
+      (e: IBasketItem[]) => {
+        this.checkItemExistsInCart(e);
+      },
+      (err) => console.log(err)
+    );
+  }
+  ngOnInit() {
+    const basket = this.BasketService.getCurrentBasketValue();
+    if (basket) {
+      this.checkItemExistsInCart(basket.cart);
+    }
+  }
 }

@@ -39,7 +39,11 @@ namespace api.Controllers {
         public async Task<ActionResult<AddressDTO>> GetUserAddress () {
             var user = await _userManager.FindByUserByClaimsPrincipleWithAddressAsync (HttpContext.User);
             if (user == null) return Unauthorized (new ErrorRes (401));
-            return _mapper.Map<Address, AddressDTO> (user.address);
+            var useraddress = _mapper.Map<Address, AddressDTO> (user.address);
+            if (useraddress == null) {
+                return Ok (new AddressDTO ());
+            }
+            return Ok (useraddress);
         }
 
         [HttpPut ("address")]
@@ -48,7 +52,7 @@ namespace api.Controllers {
             if (user == null) return Unauthorized (new ErrorRes (401));
             user.address = _mapper.Map<AddressDTO, Address> (address);
             var result = await _userManager.UpdateAsync (user);
-            if (result.Succeeded) return Ok (_mapper.Map<Address, AddressDTO> (user.address));
+            if (result.Succeeded) return Ok ();
             return BadRequest ("Problem updating the user");
         }
 

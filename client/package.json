@@ -5,7 +5,7 @@
     "ng": "ng",
     "gc": "git add . && git commit -m 'add auth' && git push .",
     "start": "ng serve --open",
-    "cc": "ng g c order ",
+    "cc": "ng g c checkout/address",
     "gi": "ng g i _model/Photo --skip-tests --flat ",
     "ccc": "ng g c components/textInput",
     "cs": "ng g s _services/account ",
@@ -15,7 +15,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "backend": "cd .. && cd api && dotnet watch run",
+    "ra": "concurrently \"npm start\" \"npm run backend\""
   },
   "private": true,
   "dependencies": {

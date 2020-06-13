@@ -1,0 +1,115 @@
+<h4 class="mb-3">Shipping Address</h4>
+<form [formGroup]="AddressForm" (ngSubmit)="submitFunc()">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="Name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Name"
+        formControlName="Name"
+        [ngClass]="{
+          'is-invalid':
+            AddressForm.get('Name').errors && AddressForm.get('Name').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Valid name is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="address">Street</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Street"
+      formControlName="Street"
+      [ngClass]="{
+        'is-invalid':
+          AddressForm.get('Street').errors && AddressForm.get('Street').touched
+      }"
+    />
+    <div class="invalid-feedback">
+      Please enter your Street address.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="address">City</label>
+    <input
+      type="text"
+      class="form-control"
+      id="City"
+      formControlName="City"
+      [ngClass]="{
+        'is-invalid':
+          AddressForm.get('City').errors && AddressForm.get('City').touched
+      }"
+    />
+    <div class="invalid-feedback">
+      Please enter your City address.
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 mb-3">
+      <label for="address">Country</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Country"
+        formControlName="Country"
+        [ngClass]="{
+          'is-invalid':
+            AddressForm.get('Country').errors &&
+            AddressForm.get('Country').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter your Country.
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="address">Province</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Province"
+        formControlName="Province"
+        [ngClass]="{
+          'is-invalid':
+            AddressForm.get('Province').errors &&
+            AddressForm.get('Province').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter your Province.
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="address">Postal Code</label>
+      <input
+        type="text"
+        class="form-control"
+        id="PostalCode"
+        formControlName="PostalCode"
+        [ngClass]="{
+          'is-invalid':
+            AddressForm.get('PostalCode').errors &&
+            AddressForm.get('PostalCode').touched
+        }"
+      />
+      <div class="invalid-feedback">
+        Please enter your Postal Code.
+      </div>
+    </div>
+  </div>
+  <hr class="mb-4" />
+  <button
+    [disabled]="!AddressForm.valid"
+    type="submit"
+    class="btn-primary btn-lg btn buy-now"
+  >
+    Buy Now
+  </button>
+</form>

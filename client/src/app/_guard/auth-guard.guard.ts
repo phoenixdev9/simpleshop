@@ -22,7 +22,7 @@ export class AuthGuardGuard implements CanActivate {
   ): Observable<boolean> {
     return this.accountService.currentUser$.pipe(
       map((auth) => {
-        if (auth) {
+        if (auth || localStorage.getItem('token')) {
           return true;
         }
         this.router.navigate(['login']);

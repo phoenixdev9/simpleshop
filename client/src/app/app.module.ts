@@ -22,6 +22,8 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
+import { CartComponent } from './checkout/cart/cart.component';
+import { AddressComponent } from './checkout/address/address.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,8 @@ import { OrderComponent } from './order/order.component';
     RegisterComponent,
     CheckoutComponent,
     OrderComponent,
+    CartComponent,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200611163610_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20200613180103_InitiApp")]
+    partial class InitiApp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,10 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Country")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PostalCode")
@@ -75,6 +75,62 @@ namespace Infrastructure.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("Domains.Entities.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BuyerEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ShipToAddressId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShipToAddressId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Domains.Entities.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
+                    b.Property<Guid>("ProductItemId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("Domains.Entities.Product", b =>
@@ -355,6 +411,20 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Domains.Entities.User", "User")
                         .WithMany("BasketItems")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Domains.Entities.Order", b =>
+                {
+                    b.HasOne("Domains.Entities.Address", "ShipToAddress")
+                        .WithMany()
+                        .HasForeignKey("ShipToAddressId");
+                });
+
+            modelBuilder.Entity("Domains.Entities.OrderItem", b =>
+                {
+                    b.HasOne("Domains.Entities.Order", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("Domains.Entities.Product", b =>

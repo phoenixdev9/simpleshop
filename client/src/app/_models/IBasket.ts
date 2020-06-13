@@ -8,20 +8,21 @@
 // }
 
 export interface IBasketItem {
-  id: number;
+  id: string;
   productName: string;
   productId: string;
   quantity: number;
+  price: number;
   pictureUrl: string;
 }
 
-// export class Basket implements IBasket {
-//   id = uuid();
-//   items: IBasketItem[] = [];
-// }
+export interface IAddBasket {
+  ProductId: string;
+  Quantity: number;
+}
 
-export interface IBasketTotals {
-  shipping: number;
-  subtotal: number;
+export interface IBasket {
+  cart: IBasketItem[];
   total: number;
+  totalItems: number;
 }
