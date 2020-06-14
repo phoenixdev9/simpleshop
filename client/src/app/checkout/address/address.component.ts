@@ -3,6 +3,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
+import { BasketService } from 'src/app/_services/basket.service';
+import { Observable } from 'rxjs';
+import { IBasket } from 'src/app/_models/IBasket';
 
 @Component({
   selector: 'app-address',
@@ -12,7 +15,11 @@ import { AccountService } from 'src/app/_services/account.service';
 export class AddressComponent implements OnInit {
   @Output() finishOrder: EventEmitter<any> = new EventEmitter();
   AddressForm: FormGroup;
-  constructor(private as: AccountService, private router: Router) {
+  basket$: Observable<IBasket>;
+  ngOnInit(): void {
+    this.basket$ = this.bs.basket$;
+  }
+  constructor(private bs: BasketService, private as: AccountService) {
     this.setupForm({
       name: '',
       street: '',
@@ -23,7 +30,6 @@ export class AddressComponent implements OnInit {
     });
     this.getUserAddress();
   }
-  ngOnInit(): void {}
   setupForm(address: IAddress | null) {
     this.AddressForm = new FormGroup({
       Name: new FormControl(address.name ?? '', [Validators.required]),

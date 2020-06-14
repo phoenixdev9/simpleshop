@@ -52,11 +52,11 @@ namespace Infrastructure.Data {
                 }
                 if (!userManager.Users.Any ()) {
                     var user = new User {
-                        DisplayName = "Bob",
-                        Email = "bob@test.com",
-                        UserName = "bob@test.com",
+                        DisplayName = "Eric",
+                        Email = "Eric@email.com",
+                        UserName = "Eric@email.com",
                         address = new Address {
-                        Name = "Bob",
+                        Name = "Eric",
                         Street = "104st 41a ave",
                         City = "Vancouver",
                         Province = "BC",
@@ -66,21 +66,6 @@ namespace Infrastructure.Data {
 
                     await userManager.CreateAsync (user, "Pa$$w0rd");
                 }
-
-                // if (!context.DeliveryMethods.Any())
-                // {
-                //     var dmData =
-                //         File.ReadAllText(path + @"/Data/SeedData/delivery.json");
-
-                //     var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
-
-                //     foreach (var item in methods)
-                //     {
-                //         context.DeliveryMethods.Add(item);
-                //     }
-
-                //     await context.SaveChangesAsync();
-                // }
             } catch (Exception ex) {
                 var logger = loggerFactory.CreateLogger<StoreContextSeed> ();
                 logger.LogError (ex.Message);

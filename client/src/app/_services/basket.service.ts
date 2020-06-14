@@ -40,4 +40,12 @@ export class BasketService {
       })
     );
   }
+  clearBasket() {
+    return this.http.delete(this.baseUrl).pipe(
+      map((basket: IBasket) => {
+        this.basketSource.next(basket);
+        return basket.cart;
+      })
+    );
+  }
 }

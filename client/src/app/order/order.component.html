@@ -6,13 +6,23 @@
           <tr class="text-secondary">
             <td><b>Order Date:</b> {{ order.orderDate | date: "short" }}</td>
             <td><b>Total:</b> ${{ order.total }}</td>
-            <td><b>Ship To:</b> {{ order.shipToAddress.name }}</td>
+            <td><b>Status:</b> {{ order.status }}</td>
             <td><b>Order#</b> {{ order.id }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="card-body">
+      <b>Shipping to:</b>
+      <br />
+      <div class="bd-example">
+        <address>
+          {{ order.shipToAddress.street }}<br />
+          {{ order.shipToAddress.city }}, {{ order.shipToAddress.province }}
+          {{ order.shipToAddress.country }} {{ order.shipToAddress.postalCode
+          }}<br />
+        </address>
+      </div>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -25,10 +35,10 @@
         <tbody>
           <tr *ngFor="let item of order.orderItems">
             <th scope="row">
-              <img src="assets/images/default.png" />
+              <img [src]="item.pictureUrl ?? 'assets/images/default.png'" />
             </th>
             <td>{{ item.productName }}</td>
-            <td>{{ item.quantity }}</td>
+            <td>x{{ item.quantity }}</td>
             <td>${{ item.price }}</td>
           </tr>
         </tbody>

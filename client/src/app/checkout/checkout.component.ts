@@ -1,7 +1,7 @@
+import { BasketService } from 'src/app/_services/basket.service';
 import { Router } from '@angular/router';
 import { OrderService } from './../_services/order.service';
 import { Observable } from 'rxjs';
-import { BasketService } from './../_services/basket.service';
 import { Component, OnInit } from '@angular/core';
 import { IBasketItem, IBasket } from '../_models/IBasket';
 
@@ -11,13 +11,22 @@ import { IBasketItem, IBasket } from '../_models/IBasket';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
-  constructor(private os: OrderService, private router: Router) {}
+  constructor(
+    private os: OrderService,
+    private bs: BasketService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
   submitOrder() {
     this.os.addOrder().subscribe(
       () => {
-        this.router.navigateByUrl('/thankyou');
+        this.bs.clearBasket().subscribe(
+          () => {
+            this.router.navigateByUrl('/thankyou');
+          },
+          (err) => console.log(err)
+        );
       },
       (err) => console.log(err)
     );

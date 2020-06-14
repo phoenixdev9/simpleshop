@@ -1,7 +1,7 @@
 <div class="card h-100 shadow-sm">
   <div class="image position-relative" style="cursor: pointer;">
     <img
-      src="assets/images/default.png"
+      [src]="product.pictureUrl ?? 'assets/images/default.png'"
       alt="{{ product.name }}"
       class="img-fluid bg-info"
     />
