@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { IAddress } from '../_models/IAddress';
+import { _client_home } from '../_constVars/_client_consts';
 
 @Injectable({
   providedIn: 'root',
@@ -66,7 +67,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl(_client_home);
   }
 
   getUserAddress() {

@@ -1,4 +1,8 @@
 import {
+  _client_notfound,
+  _client_servererror,
+} from './../_constVars/_client_consts';
+import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
@@ -8,6 +12,7 @@ import { Observable, throwError } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
+import { _client_login } from '../_constVars/_client_consts';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -33,13 +38,13 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
           if (error.status === 401) {
             alert(`You are not authorized, please log in.`);
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl(_client_login);
           }
           if (error.status === 404) {
-            this.router.navigateByUrl('/not-found');
+            this.router.navigateByUrl(_client_notfound);
           }
           if (error.status === 500) {
-            this.router.navigateByUrl('/server-error');
+            this.router.navigateByUrl(_client_servererror);
           }
         }
         return throwError(error);

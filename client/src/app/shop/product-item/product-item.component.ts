@@ -4,6 +4,7 @@ import { IProduct } from 'src/app/_models/IProduct';
 import { BasketService } from 'src/app/_services/basket.service';
 import { Observable } from 'rxjs';
 import { IBasketItem, IBasket } from 'src/app/_models/IBasket';
+import { _client_shop } from 'src/app/_constVars/_client_consts';
 
 @Component({
   selector: 'app-product-item',
@@ -11,6 +12,7 @@ import { IBasketItem, IBasket } from 'src/app/_models/IBasket';
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent implements OnInit {
+  shop: string = _client_shop;
   @Input() product: IProduct;
   isContains: boolean = false;
   constructor(private BasketService: BasketService) {}

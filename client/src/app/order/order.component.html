@@ -35,7 +35,7 @@
         <tbody>
           <tr *ngFor="let item of order.orderItems">
             <th scope="row">
-              <img [src]="item.pictureUrl ?? 'assets/images/default.png'" />
+              <img [src]="item.pictureUrl || 'assets/images/default.png'" />
             </th>
             <td>{{ item.productName }}</td>
             <td>x{{ item.quantity }}</td>

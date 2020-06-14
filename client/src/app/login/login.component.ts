@@ -44,15 +44,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  // onSubmit() {
-  //   this.accountService.login(this.loginForm.value).subscribe(
-  //     () => {
-  //       this.router.navigateByUrl(this.returnUrl);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 }

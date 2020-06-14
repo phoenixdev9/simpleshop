@@ -1,3 +1,9 @@
+import {
+  _client_login,
+  _client_register,
+  _client_checkout,
+  _client_order,
+} from './../_constVars/_client_consts';
 import { AccountService } from './../_services/account.service';
 import { IUser } from './../_models/IUser';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +17,10 @@ import { IBasket } from '../_models/IBasket';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  login: string = _client_login;
+  register: string = _client_register;
+  checkout: string = _client_checkout;
+  order: string = _client_order;
   currentUser$: Observable<IUser>;
   basket$: Observable<IBasket>;
 

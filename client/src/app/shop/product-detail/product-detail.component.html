@@ -3,7 +3,7 @@
   <div class="row" *ngIf="product">
     <div class="col-6">
       <img
-        [src]="product.pictureUrl ?? 'assets/images/default.png'"
+        [src]="product.pictureUrl || 'assets/images/default.png'"
         alt="{{ product.name }}"
         class="img-fluid w-100"
       />

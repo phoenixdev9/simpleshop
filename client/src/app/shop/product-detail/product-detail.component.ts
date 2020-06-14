@@ -1,3 +1,4 @@
+import { _client_checkout } from './../../_constVars/_client_consts';
 import {
   _checkItemExistsInCart,
   _findItemExistsInCart,
@@ -27,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
       .editBasket({ ProductId: id, Quantity: this.quantity })
       .subscribe(
         () => {
-          this.router.navigateByUrl('/checkout');
+          this.router.navigateByUrl(_client_checkout);
         },
         (err) => console.log(err)
       );

@@ -4,6 +4,7 @@ import { OrderService } from './../_services/order.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IBasketItem, IBasket } from '../_models/IBasket';
+import { _client_thankyou } from '../_constVars/_client_consts';
 
 @Component({
   selector: 'app-checkout',
@@ -23,7 +24,7 @@ export class CheckoutComponent implements OnInit {
       () => {
         this.bs.clearBasket().subscribe(
           () => {
-            this.router.navigateByUrl('/thankyou');
+            this.router.navigateByUrl(_client_thankyou);
           },
           (err) => console.log(err)
         );
