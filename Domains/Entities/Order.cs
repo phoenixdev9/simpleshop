@@ -7,11 +7,12 @@ namespace Domains.Entities
     {
         public Order() { }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress)
+        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress, decimal totalPrice)
         {
             BuyerEmail = buyerEmail;
             ShipToAddress = shipToAddress;
             OrderItems = orderItems;
+            Total = totalPrice;
         }
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
@@ -19,5 +20,6 @@ namespace Domains.Entities
         public IReadOnlyList<OrderItem> OrderItems { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public string BuyerEmail { get; set; }
+        public decimal Total { get; set; }
     }
 }

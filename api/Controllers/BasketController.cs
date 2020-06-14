@@ -20,45 +20,26 @@ namespace api.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        private readonly IGenericsRepo<BasketItem> _BasketItem;
-        private readonly IProductRepo _product;
+        private readonly IBasketRepo _basketRepo;
+        private readonly IProductRepo _productRepo;
+        private readonly IGenericsRepo<BasketItem> _basketGenericRepo;
 
-        public BasketController(UserManager<User> userManager, IMapper mapper, IGenericsRepo<BasketItem> BasketItem, IProductRepo Product)
+        public BasketController(UserManager<User> userManager, IMapper mapper, IGenericsRepo<BasketItem> basketGenericRepo, IBasketRepo basketRepo, IProductRepo productRepo)
         {
             _mapper = mapper;
             _userManager = userManager;
-            _BasketItem = BasketItem;
-            _product = Product;
+            _basketRepo = basketRepo;
+            _productRepo = productRepo;
+            _basketGenericRepo = basketGenericRepo;
         }
-        /////////////////////////////////////////////////////
-        private async Task<BasketItem> FindProductFromBasket(Guid productId, string userId)
-        {
-            var items = await _BasketItem.ListAllAsync();
-            return items.FirstOrDefault(x => x.ProductId == productId && x.UserId == userId);
-        }
-        private async Task<List<BasketItem>> GetProductFromBasket(string userId)
-        {
-            var items = await _BasketItem.ListAllAsync();
-            return items.Where(x => x.UserId == userId).ToList();
-        }
-        private decimal getTotal(IReadOnlyList<ReturnBasket> basketItems)
-        {
-            decimal total = 0;
-            for (int i = 0; i < basketItems.Count; i++)
-            {
-                var currentProduct = basketItems.ElementAt(i);
-                total += currentProduct.Price * currentProduct.Quantity;
-            }
-            return total;
-        }
-        /////////////////////////////////////////////////////
-        [HttpGet]
+
+        [HttpGet(Name = "Get")]
         public async Task<ActionResult<ReturnCheckout>> GetBaskets()
         {
             var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
             if (user == null) return Unauthorized(new ErrorRes(401));
-            var basketOfReturnProducts = _mapper.Map<List<BasketItem>, List<ReturnBasket>>(await GetProductFromBasket(user.Id));
-            return Ok(new ReturnCheckout(basketOfReturnProducts, getTotal(basketOfReturnProducts)));
+            var basketItems = await _basketRepo.GetCarts(user.Id);
+            return Ok(new ReturnCheckout(_mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>>(basketItems), _basketRepo.GetTotal(basketItems)));
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<ReturnCheckout>> DeleteBasketItem(Guid Id)
@@ -66,16 +47,34 @@ namespace api.Controllers
             var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
             if (user == null) return Unauthorized(new ErrorRes(401));
 
-            var item = await FindProductFromBasket(Id, user.Id);
+            var item = await _basketRepo.GetProductFromBasket(Id, user.Id);
             if (item == null)
                 return NotFound(new ErrorRes(404));
 
-            _BasketItem.Delete(item);
-            if (await _BasketItem.SaveAll())
+            _basketGenericRepo.Delete(item);
+            if (await _basketGenericRepo.SaveAll())
             {
-                var basketOfReturnProducts = _mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>>(await GetProductFromBasket(user.Id));
+                return await GetBaskets();
+                // var basketItems = await _basketRepo.GetCarts(user.Id);
+                // return Ok(new ReturnCheckout(_mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>>(basketItems), _basketRepo.GetTotal(basketItems)));
+            }
+            return BadRequest(new ErrorRes(400, "Not able to delete the product from the cart"));
+        }
+        [HttpDelete]
+        public async Task<ActionResult<ReturnCheckout>> ClearBasket()
+        {
+            var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
+            if (user == null) return Unauthorized(new ErrorRes(401));
 
-                return Ok(new ReturnCheckout(basketOfReturnProducts, getTotal(basketOfReturnProducts)));
+            var item = await _basketRepo.GetCarts(user.Id);
+            foreach (var basketItem in item)
+            {
+                _basketGenericRepo.Delete(basketItem);
+            }
+
+            if (await _basketGenericRepo.SaveAll())
+            {
+                return await GetBaskets();
             }
             return BadRequest(new ErrorRes(400, "Not able to delete the product from the cart"));
         }
@@ -84,32 +83,32 @@ namespace api.Controllers
         public async Task<ActionResult<ReturnCheckout>> AddBasket(BasketDTO basket)
         {
             //Check product exists
-            var p = await _product.GetProductById(basket.ProductId);
+            var p = await _productRepo.GetProductById(basket.ProductId);
             if (p == null)
                 return NotFound(new ErrorRes(404, "Product doesn't exist"));
             //Find the User
             var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
             if (user == null) return Unauthorized(new ErrorRes(401));
             //Check if user has the product or not
-            var item = user.BasketItems.FirstOrDefault(x => x.ProductId == basket.ProductId);
+            var item = await _basketRepo.GetProductFromBasket(basket.ProductId, user.Id);
             if (item == null)
             {
-                _BasketItem.Add(new BasketItem
+                _basketGenericRepo.Add(new BasketItem
                 {
                     Product = p,
                     Quantity = basket.Quantity,
                     User = user,
                 });
             }
+            //Update the basket item if exists
             else
             {
                 item.Quantity = basket.Quantity;
-                _BasketItem.Update(item);
+                _basketGenericRepo.Update(item);
             }
-            if (await _BasketItem.SaveAll())
+            if (await _basketGenericRepo.SaveAll())
             {
-                var basketOfReturnProducts = _mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>>(await GetProductFromBasket(user.Id));
-                return Ok(new ReturnCheckout(basketOfReturnProducts, getTotal(basketOfReturnProducts)));
+                return await GetBaskets();
             }
             return BadRequest(new ErrorRes(400));
         }

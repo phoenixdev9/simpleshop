@@ -18,7 +18,7 @@ namespace api.Extensions
             services.AddScoped(typeof(IGenericsRepo<>), (typeof(GenericsRepo<>)));
             services.AddScoped<IToken, Token>();
             services.AddScoped<IOrderRepo, OrderRepo>();
-
+            services.AddScoped<IBasketRepo, BasketRepo>();
 
             //Error Validation
             services.Configure<ApiBehaviorOptions>(options =>

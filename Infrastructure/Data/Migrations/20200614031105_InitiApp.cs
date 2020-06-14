@@ -238,7 +238,8 @@ namespace Infrastructure.Data.Migrations
                     OrderDate = table.Column<DateTime>(nullable: false),
                     ShipToAddressId = table.Column<Guid>(nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    BuyerEmail = table.Column<string>(nullable: true)
+                    BuyerEmail = table.Column<string>(nullable: true),
+                    Total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,30 +1,42 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domains.Entities;
 using Domains.IRepo;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data.Repo
 {
     public class BasketRepo : IBasketRepo
     {
-        public Task<BasketItem> AddCart()
+        private readonly StoreContext _context;
+        public BasketRepo(
+            StoreContext context
+        )
         {
-            throw new System.NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteCart()
+        public async Task<IReadOnlyList<BasketItem>> GetCarts(string userid)
         {
-            throw new System.NotImplementedException();
+            return await _context.BasketItems.Where(x => x.UserId == userid).Include(x => x.Product).ToListAsync();
         }
 
-        public Task<ICollection<BasketItem>> GetCarts()
+        public async Task<BasketItem> GetProductFromBasket(Guid productId, string UserId)
         {
-            throw new System.NotImplementedException();
+            return await _context.BasketItems.Include(x => x.Product).FirstOrDefaultAsync(x => x.ProductId == productId && x.UserId == UserId);
         }
 
-        public Task<BasketItem> UpdateCart()
+        public decimal GetTotal(IReadOnlyList<BasketItem> basketItems)
         {
-            throw new System.NotImplementedException();
+            decimal total = 0;
+            for (int i = 0; i < basketItems.Count; i++)
+            {
+                var currentProduct = basketItems.ElementAt(i);
+                total += currentProduct.Product.Price * currentProduct.Quantity;
+            }
+            return total;
         }
     }
 }
