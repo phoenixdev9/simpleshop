@@ -24,6 +24,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
 import { CartComponent } from './checkout/cart/cart.component';
 import { AddressComponent } from './checkout/address/address.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { AddressComponent } from './checkout/address/address.component';
     OrderComponent,
     CartComponent,
     AddressComponent,
+    ThankyouComponent,
   ],
   imports: [
     BrowserModule,

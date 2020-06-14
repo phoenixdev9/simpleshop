@@ -5,7 +5,7 @@ import {
 import { ProductsService } from './../../_services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/_models/IProduct';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BasketService } from 'src/app/_services/basket.service';
 
 @Component({
@@ -19,14 +19,15 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private shopService: ProductsService,
     private activateRoute: ActivatedRoute,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private router: Router
   ) {}
   addItemToBasket(id: string) {
     this.basketService
       .editBasket({ ProductId: id, Quantity: this.quantity })
       .subscribe(
         () => {
-          this.loadProduct();
+          this.router.navigateByUrl('/checkout');
         },
         (err) => console.log(err)
       );

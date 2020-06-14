@@ -15,4 +15,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.basket$ = this.bs.basket$;
   }
+  deleteBusket(id: string) {
+    this.bs.removeItemFromBasket(id).subscribe(
+      () => {},
+      (err) => console.log(err)
+    );
+  }
 }

@@ -8,5 +8,7 @@ export const _checkItemExistsInCart = (b: IBasketItem[], productId: string) => {
   }
 };
 export const _findItemExistsInCart = (b: IBasketItem[], productId: string) => {
-  return b.find((e: IBasketItem) => e.productId === productId);
+  if (b) {
+    return b.find((e: IBasketItem) => e.productId === productId);
+  }
 };

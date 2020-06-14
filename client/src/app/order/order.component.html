@@ -1,1 +1,38 @@
-<p>order works!</p>
+<div class="orders">
+  <div class="card mt-4" *ngFor="let order of orders">
+    <div class="card-header">
+      <table class="table-head table table-sm table-borderless">
+        <tbody>
+          <tr class="text-secondary">
+            <td><b>Order Date:</b> {{ order.orderDate | date: "short" }}</td>
+            <td><b>Total:</b> ${{ order.total }}</td>
+            <td><b>Ship To:</b> {{ order.shipToAddress.name }}</td>
+            <td><b>Order#</b> {{ order.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.orderItems">
+            <th scope="row">
+              <img src="assets/images/default.png" />
+            </th>
+            <td>{{ item.productName }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

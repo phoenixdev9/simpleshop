@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCurrentUser();
-    this.loadBasket();
   }
 
   loadCurrentUser() {
@@ -24,7 +23,7 @@ export class AppComponent implements OnInit {
     if (token) {
       this.accountService.loadCurrentUser(token).subscribe(
         () => {
-          console.log('loaded user');
+          this.loadBasket();
         },
         (error) => {
           console.log(error);

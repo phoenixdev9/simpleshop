@@ -1,5 +1,5 @@
 import { IAddress } from './../../_models/IAddress';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
@@ -10,6 +10,7 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit {
+  @Output() finishOrder: EventEmitter<any> = new EventEmitter();
   AddressForm: FormGroup;
   constructor(private as: AccountService, private router: Router) {
     this.setupForm({
@@ -43,7 +44,9 @@ export class AddressComponent implements OnInit {
   }
   submitFunc() {
     this.as.updateUserAddress(this.AddressForm.value).subscribe(
-      () => {},
+      () => {
+        this.finishOrder.emit();
+      },
       (error) => console.log(error)
     );
   }

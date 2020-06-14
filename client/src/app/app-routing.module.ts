@@ -1,3 +1,4 @@
+import { ThankyouComponent } from './thankyou/thankyou.component';
 import { OrderComponent } from './order/order.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthGuardGuard } from './_guard/auth-guard.guard';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotfoundComponent,
+  },
+  {
+    path: 'thankyou',
+    component: ThankyouComponent,
   },
   {
     path: '',

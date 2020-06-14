@@ -9,3 +9,4 @@ export const _api_account = 'account';
 export const _api_login = 'login';
 export const _api_signup = 'register';
 export const _api_address = 'address';
+export const _api_order = 'order';

@@ -1,10 +1,10 @@
 <div class="main row">
   <!-- Cart -->
-  <div class="col-md-4 order-md-2 mb-4">
+  <div class="col-md-5 order-md-2 mb-4">
     <app-cart></app-cart>
   </div>
   <!-- Address -->
-  <div class="col-md-8 order-md-1">
-    <app-address></app-address>
+  <div class="col-md-7 order-md-1">
+    <app-address (finishOrder)="submitOrder()"></app-address>
   </div>
 </div>
