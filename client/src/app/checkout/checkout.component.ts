@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
       () => {
         this.bs.clearBasket().subscribe(
           () => {
-            this.router.navigateByUrl(_client_thankyou);
+            this.router.navigate([_client_thankyou]);
           },
           (err) => console.log(err)
         );

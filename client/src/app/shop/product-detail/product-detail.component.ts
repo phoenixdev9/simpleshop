@@ -28,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
       .editBasket({ ProductId: id, Quantity: this.quantity })
       .subscribe(
         () => {
-          this.router.navigateByUrl(_client_checkout);
+          this.router.navigate([_client_checkout]);
         },
         (err) => console.log(err)
       );

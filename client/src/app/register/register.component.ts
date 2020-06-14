@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   submitFunc() {
     this.as.register(this.signUpForm.value).subscribe(
       () => {
-        this.router.navigateByUrl(this.returnUrl);
+        this.router.navigate([this.returnUrl]);
       },
       (error) => {
         console.log(error);

@@ -36,15 +36,15 @@ export class ErrorInterceptor implements HttpInterceptor {
               alert('Bad request');
             }
           }
+          if (error.status === 404) {
+            this.router.navigate([_client_notfound]);
+          }
           if (error.status === 401) {
             alert(`You are not authorized, please log in.`);
-            this.router.navigateByUrl(_client_login);
-          }
-          if (error.status === 404) {
-            this.router.navigateByUrl(_client_notfound);
+            this.router.navigate([_client_login]);
           }
           if (error.status === 500) {
-            this.router.navigateByUrl(_client_servererror);
+            this.router.navigate([_client_servererror]);
           }
         }
         return throwError(error);

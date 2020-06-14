@@ -67,7 +67,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
-    this.router.navigateByUrl(_client_home);
+    this.router.navigate([_client_home]);
   }
 
   getUserAddress() {
