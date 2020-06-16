@@ -17,17 +17,6 @@ export class LoadingInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // console.log('req.method', req.method);
-    // console.log('req.url', req.url);
-    if (req.method === 'POST') {
-      return next.handle(req);
-    }
-    // if (req.method === 'DELETE') {
-    //   return next.handle(req);
-    // }
-    // if (req.url.includes('emailexists')) {
-    //   return next.handle(req);
-    // }
     this.busyService.busy();
     return next.handle(req).pipe(
       delay(800),
