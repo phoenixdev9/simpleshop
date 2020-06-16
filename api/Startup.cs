@@ -34,7 +34,7 @@ namespace api {
                     .AllowAnyMethod ()
                     .AllowAnyHeader ()
                     .AllowCredentials ()
-                    .WithOrigins ("http://localhost:4200/");
+                    .WithOrigins ("http://localhost:4200");
             }));
             // //Add User DB
             // services.AddDbContext<AppIdentityDbContext> (x => {
