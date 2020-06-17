@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 
-namespace api.DTO
-{
-    public class ReturnCheckout
-    {
-        public ReturnCheckout(IReadOnlyList<ReturnBasket> c, decimal t)
-        {
+namespace api.DTO {
+    public class ReturnCheckout {
+        public ReturnCheckout (IReadOnlyList<ReturnBasket> c, decimal t, int counts) {
             cart = c;
             total = t;
-            totalItems = c.Count;
+            totalItems = counts;
         }
         public IReadOnlyList<ReturnBasket> cart { get; set; }
         public decimal total { get; set; }

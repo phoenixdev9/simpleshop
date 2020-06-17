@@ -1,3 +1,4 @@
+import { BasketService } from 'src/app/_services/basket.service';
 import { ShopParams } from '../_models/ShopParams';
 import { ProductsService } from './../_services/products.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
@@ -25,7 +26,7 @@ export class ShopComponent implements OnInit {
     { name: 'Price: Low to High', value: 'priceAsc' },
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
-  constructor(private ps: ProductsService) {
+  constructor(private ps: ProductsService, private bs: BasketService) {
     this.shopParams = this.ps.getShopParams();
     this.getProducts();
     this.getBrands();
@@ -71,6 +72,7 @@ export class ShopComponent implements OnInit {
     this.ps.setShopParams(params);
     this.getProducts();
   }
+
   onBrandSelected(brandId: string) {
     const params = this.ps.getShopParams();
     params.brandId = brandId;
@@ -107,7 +109,9 @@ export class ShopComponent implements OnInit {
   }
 
   onReset() {
-    this.searchTerm.nativeElement.value = '';
+    if (this.searchTerm) {
+      this.searchTerm.nativeElement.value = '';
+    }
     this.shopParams = new ShopParams();
     this.ps.setShopParams(this.shopParams);
     this.getProducts();

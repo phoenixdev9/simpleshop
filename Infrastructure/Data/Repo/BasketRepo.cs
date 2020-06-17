@@ -31,5 +31,14 @@ namespace Infrastructure.Data.Repo {
             }
             return total;
         }
+
+        public int getTotalItems (IReadOnlyList<BasketItem> basketItems) {
+            int total = 0;
+            for (int i = 0; i < basketItems.Count; i++) {
+                var currentProduct = basketItems.ElementAt (i);
+                total += currentProduct.Quantity;
+            }
+            return total;
+        }
     }
 }

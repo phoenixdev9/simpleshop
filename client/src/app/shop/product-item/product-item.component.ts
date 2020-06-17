@@ -15,7 +15,11 @@ export class ProductItemComponent implements OnInit {
   shop: string = _client_shop;
   @Input() product: IProduct;
   isContains: boolean = false;
-  constructor(private BasketService: BasketService) {}
+  basket$: Observable<IBasket>;
+
+  constructor(private BasketService: BasketService) {
+    this.basket$ = BasketService.basket$;
+  }
   checkItemExistsInCart(b: IBasketItem[]) {
     this.isContains = _checkItemExistsInCart(b, this.product.id);
   }
@@ -39,9 +43,15 @@ export class ProductItemComponent implements OnInit {
     );
   }
   ngOnInit() {
-    const basket = this.BasketService.getCurrentBasketValue();
-    if (basket) {
-      this.checkItemExistsInCart(basket.cart);
-    }
+    this.basket$.subscribe(
+      (e) => {
+        if (e) {
+          this.checkItemExistsInCart(e.cart);
+        } else {
+          this.isContains = false;
+        }
+      },
+      (err) => console.log('err', err)
+    );
   }
 }

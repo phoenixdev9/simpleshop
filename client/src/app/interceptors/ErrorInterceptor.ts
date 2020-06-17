@@ -41,7 +41,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
           if (error.status === 401) {
             alert(`You are not authorized, please log in.`);
-            this.router.navigate([_client_login]);
           }
           if (error.status === 500) {
             this.router.navigate([_client_servererror]);

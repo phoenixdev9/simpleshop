@@ -1,3 +1,5 @@
+import { BasketService } from 'src/app/_services/basket.service';
+import { _client_home } from './../_constVars/_client_consts';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private bs: BasketService
   ) {}
 
   ngOnInit() {
@@ -41,7 +44,18 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     this.accountService.login(data.value).subscribe(
       (e) => {
-        this.router.navigate([_client_register]);
+        this.router.navigate([_client_home]);
+        this.loadBasket();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  loadBasket() {
+    this.bs.getBasket().subscribe(
+      () => {
+        console.log('initialised basket');
       },
       (error) => {
         console.log(error);

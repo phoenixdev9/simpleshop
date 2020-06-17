@@ -2,7 +2,7 @@ import { IAddBasket, IBasket } from './../_models/IBasket';
 import { _api_default, _api_basket } from './../_constVars/_api_consts';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -14,12 +14,17 @@ export class BasketService {
   basket$ = this.basketSource.asObservable();
   constructor(private http: HttpClient) {}
   getBasket() {
-    return this.http.get(this.baseUrl).pipe(
-      map((basket: IBasket) => {
-        this.basketSource.next(basket);
-        return basket;
-      })
-    );
+    if (localStorage.getItem('token')) {
+      return this.http.get(this.baseUrl).pipe(
+        map((basket: IBasket) => {
+          this.basketSource.next(basket);
+          return basket;
+        })
+      );
+    } else {
+      this.basketSource.next(null);
+      return of(null);
+    }
   }
   editBasket(data: IAddBasket) {
     return this.http.post(this.baseUrl, data).pipe(
@@ -47,5 +52,9 @@ export class BasketService {
         return basket.cart;
       })
     );
+  }
+  logoutBasket() {
+    console.log('logout basket');
+    this.basketSource.next(null);
   }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using api.DTO;
 using api.Error;
@@ -35,7 +34,7 @@ namespace api.Controllers {
             var user = await _userManager.FindByEmailFromClaimsPrinciple (HttpContext.User);
             if (user == null) return Unauthorized (new ErrorRes (401));
             var basketItems = await _basketRepo.GetCarts (user.Id);
-            return Ok (new ReturnCheckout (_mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>> (basketItems), _basketRepo.GetTotal (basketItems)));
+            return Ok (new ReturnCheckout (_mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>> (basketItems), _basketRepo.GetTotal (basketItems), _basketRepo.getTotalItems (basketItems)));
         }
 
         [HttpDelete ("{id}")]
@@ -50,8 +49,7 @@ namespace api.Controllers {
             _basketGenericRepo.Delete (item);
             if (await _basketGenericRepo.SaveAll ()) {
                 return await GetBaskets ();
-                // var basketItems = await _basketRepo.GetCarts(user.Id);
-                // return Ok(new ReturnCheckout(_mapper.Map<IReadOnlyList<BasketItem>, IReadOnlyList<ReturnBasket>>(basketItems), _basketRepo.GetTotal(basketItems)));
+
             }
             return BadRequest (new ErrorRes (400, "Not able to delete the product from the cart"));
         }
