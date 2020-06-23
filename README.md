@@ -1,7 +1,9 @@
 # Simple Shop
 > Simple Online Shop build with C# ASP.NET CORE + Angular Typescript
 
+***
 ### YouTube Demo => https://www.youtube.com/watch?v=p58TuHMb13c
+***
 
 ## Setup
 ```
