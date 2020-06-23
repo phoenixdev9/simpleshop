@@ -1,12 +1,7 @@
 # Simple Shop
 > Simple Online Shop build with C# ASP.NET CORE + Angular Typescript
-```diff
-- YouTube Demo => https://www.youtube.com/watch?v=p58TuHMb13c
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
+
+### YouTube Demo => https://www.youtube.com/watch?v=p58TuHMb13c
 
 ## Setup
 ```
