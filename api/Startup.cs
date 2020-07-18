@@ -18,7 +18,21 @@ namespace api
         {
             _Configuration = configuration;
         }
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<StoreContext>(x =>
+               x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
 
+            ConfigureServices(services);
+        }
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+
+            services.AddDbContext<StoreContext>(x =>
+                x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
         private readonly IConfiguration _Configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -28,8 +42,7 @@ namespace api
             //Add Auto Mapper
             services.AddAutoMapper(typeof(AutoMapping));
             //Add DB
-            services.AddDbContext<StoreContext>(x =>
-               x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
+
             //Add Extension for dependency injections
             services.AddApplicationServices();
             //Add Cors
@@ -52,6 +65,7 @@ namespace api
             // app.UseStatusCodePagesWithReExecute("/errors/{0}");
             // app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
@@ -59,6 +73,8 @@ namespace api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //For angular
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
             /**
             

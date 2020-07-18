@@ -12,7 +12,7 @@
     "cm": "ng g m app-routing --flat --module=app",
     "cg": "ng g guard _guard/AuthGuard",
     "cp": "ng g pipe _pipe/truncatePipe --skip-tests --flat ",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
