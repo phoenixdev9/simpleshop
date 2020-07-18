@@ -29,7 +29,7 @@ namespace api
         {
 
             services.AddDbContext<StoreContext>(x =>
-                x.UseSqlite(_Configuration.GetConnectionString("DefaultConnection")));
+                x.UseMySql(_Configuration.GetConnectionString("DefaultConnection")));
 
             ConfigureServices(services);
         }
