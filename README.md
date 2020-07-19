@@ -19,6 +19,8 @@ b). dotnet dev-certs https
 
 c). dotnet dev-certs https --trust
 
+OR Follow https://github.com/Eric-programming/simple-shop/blob/master/InstructionsSSL.txt
+
 3. cd api && dotnet watch run
 
 4. Go to https://localhost:5001
