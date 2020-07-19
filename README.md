@@ -11,7 +11,6 @@
 ```
 1. run dotnet restore
 
-
 2. Install SSL
 
 a). dotnet dev-certs https --clean
