@@ -41,7 +41,6 @@ namespace api
             services.AddControllers();
             //Add Auto Mapper
             services.AddAutoMapper(typeof(AutoMapping));
-            //Add DB
 
             //Add Extension for dependency injections
             services.AddApplicationServices();
@@ -76,19 +75,6 @@ namespace api
                 //For angular
                 endpoints.MapFallbackToController("Index", "Fallback");
             });
-            /**
-            
-
-            
-
-            app.UseSwaggerDocumention();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapFallbackToController("Index", "Fallback");
-            });
-            */
         }
     }
 }

@@ -19,9 +19,26 @@ b). dotnet dev-certs https
 
 c). dotnet dev-certs https --trust
 
+OR Follow => [Install SSL](https://github.com/Eric-programming/simple-shop/blob/master/InstructionsSSL.txt)
+
 3. cd api && dotnet watch run
 
-4. Go to https://localhost:5001
+4. cd.. && cd client && npm start
+
+```
+
+## Setup for Production
+
+```
+1. cd client && npm run build
+
+2. cd .. && cd api && dotnet watch run
+
+3. make sure app is functional on https://localhost:5001
+
+4. Change DB to a preferred data management system (MySQL, Postgres, SQL, etc.)
+
+5. Publish to Cloud or Linux server
 
 ```
 
