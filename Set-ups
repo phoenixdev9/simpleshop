@@ -1,5 +1,0 @@
-dotnet dev-certs https --clean
-
-dotnet dev-certs https
-
-dotnet dev-certs https --trust
