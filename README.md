@@ -23,7 +23,9 @@ OR Follow => [Install SSL](https://github.com/Eric-programming/simple-shop/blob/
 
 3. cd api && dotnet watch run
 
-4. cd.. && cd client && npm start
+4. cd.. && cd client && npm i
+
+5. npm start
 
 ```
 
