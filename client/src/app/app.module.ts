@@ -14,7 +14,6 @@ import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { InfoComponent } from './components/info/info.component';
 import { JwtInterceptor } from './interceptors/JWTInterceptor';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +35,6 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     ProductDetailComponent,
     NotfoundComponent,
     ServerErrorComponent,
-    InfoComponent,
     LoginComponent,
     RegisterComponent,
     CheckoutComponent,

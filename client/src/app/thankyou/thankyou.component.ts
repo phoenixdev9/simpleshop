@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { _client_order } from '../_constVars/_client_consts';
 
 @Component({
@@ -9,7 +8,7 @@ import { _client_order } from '../_constVars/_client_consts';
 })
 export class ThankyouComponent implements OnInit {
   order: string = _client_order;
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }
