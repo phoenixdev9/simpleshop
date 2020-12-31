@@ -1,6 +1,6 @@
 import {
-  _client_account,
-  _client_signin,
+  _client_account_,
+  _client_signin_,
 } from '../../shared/_constVars/_client_consts';
 import { Injectable } from '@angular/core';
 import {
@@ -28,7 +28,7 @@ export class AuthGuardGuard implements CanActivate {
         if (auth || localStorage.getItem('token')) {
           return true;
         }
-        this.router.navigate([_client_account + '/' + _client_signin]);
+        this.router.navigate([_client_account_ + '/' + _client_signin_]);
       })
     );
   }

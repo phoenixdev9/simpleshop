@@ -5,7 +5,7 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
-  _client_account,
+  _client_account_,
   _client_checkout_,
   _client_notfound_,
   _client_order_,
@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./shop/shop.module').then((m) => m.ShopModule),
   },
   {
-    path: _client_account,
+    path: _client_account_,
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
   },

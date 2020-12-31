@@ -1,7 +1,7 @@
 import {
-  _client_signin,
-  _client_signup,
-  _client_account,
+  _client_signin_,
+  _client_signup_,
+  _client_account_,
   _client_checkout_,
   _client_order_,
 } from '../../shared/_constVars/_client_consts';
@@ -18,8 +18,8 @@ import { IBasket } from '../../shared/_models/IBasket';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  login: string = _client_account + '/' + _client_signin;
-  register: string = _client_account + '/' + _client_signup;
+  login: string = _client_account_ + '/' + _client_signin_;
+  register: string = _client_account_ + '/' + _client_signup_;
   checkout: string = `/${_client_checkout_}/`;
   order: string = `/${_client_order_}/`;
   currentUser$: Observable<IUser>;
