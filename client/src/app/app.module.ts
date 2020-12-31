@@ -15,9 +15,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { JwtInterceptor } from './interceptors/JWTInterceptor';
-import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
@@ -35,8 +33,6 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     ProductDetailComponent,
     NotfoundComponent,
     ServerErrorComponent,
-    LoginComponent,
-    RegisterComponent,
     CheckoutComponent,
     OrderComponent,
     CartComponent,

@@ -1,0 +1,10 @@
+Core
+ - Guards
+ - Interceptors
+ - Navbar
+ - Not-found, thank you
+ - services for spinner
+Shared
+ - components
+ - models
+

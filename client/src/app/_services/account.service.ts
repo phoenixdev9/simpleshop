@@ -1,10 +1,10 @@
-import { ILogin, ISignup } from './../_models/IAuthForm';
+import { ILogin, ISignup } from '../_models/IAuthForm';
 import {
   _api_account,
   _api_login,
   _api_signup,
   _api_address,
-} from './../_constVars/_api_consts';
+} from '../_constVars/_api_consts';
 import { Injectable } from '@angular/core';
 import { _api_default } from '../_constVars/_api_consts';
 import { BehaviorSubject } from 'rxjs';

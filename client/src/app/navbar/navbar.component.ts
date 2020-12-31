@@ -1,10 +1,11 @@
 import {
-  _client_login,
-  _client_register,
+  _client_signin,
+  _client_signup,
   _client_checkout,
   _client_order,
+  _client_account,
 } from './../_constVars/_client_consts';
-import { AccountService } from './../_services/account.service';
+import { AccountService } from '../_services/account.service';
 import { IUser } from './../_models/IUser';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -17,8 +18,8 @@ import { IBasket } from '../_models/IBasket';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  login: string = _client_login;
-  register: string = _client_register;
+  login: string = _client_account + '/' + _client_signin;
+  register: string = _client_account + '/' + _client_signup;
   checkout: string = _client_checkout;
   order: string = _client_order;
   currentUser$: Observable<IUser>;
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser$ = this.as.currentUser$;
+    this.currentUser$.subscribe((e) => console.log('eeeee', e));
     this.basket$ = this.bs.basket$;
   }
   logout() {

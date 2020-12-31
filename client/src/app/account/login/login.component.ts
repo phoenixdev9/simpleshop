@@ -1,12 +1,12 @@
 import { BasketService } from 'src/app/_services/basket.service';
-import { _client_home } from './../_constVars/_client_consts';
+import { _client_home } from '../../_constVars/_client_consts';
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../../_services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   _client_notfound,
-  _client_register,
-} from '../_constVars/_client_consts';
+  _client_signup,
+} from '../../_constVars/_client_consts';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   submitFunc(data: any, event: Event) {
     event.preventDefault();
     this.accountService.login(data.value).subscribe(
-      (e) => {
+      () => {
         this.router.navigate([_client_home]);
         this.loadBasket();
       },
