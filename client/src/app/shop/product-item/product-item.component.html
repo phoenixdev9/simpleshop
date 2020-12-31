@@ -1,5 +1,5 @@
 <div class="card h-100 shadow-sm">
-  <div class="image position-relative" style="cursor: pointer;">
+  <div class="image position-relative" style="cursor: pointer">
     <img
       [src]="product.pictureUrl || 'assets/images/default.png'"
       alt="{{ product.name }}"
@@ -7,7 +7,7 @@
     />
   </div>
   <div class="card-body d-flex flex-column">
-    <a [routerLink]="shop + product.id">
+    <a [routerLink]="'/' + shop + '/' + product.id">
       <h6 class="text-uppercase">
         {{ product.name | slice: 0:20 }}
         <span *ngIf="product.name.length < 20">...</span>
