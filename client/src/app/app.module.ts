@@ -1,36 +1,23 @@
-import { LoadingInterceptor } from './interceptors/loading.interceptors';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptors';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ErrorInterceptor } from './interceptors/ErrorInterceptor';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { ServerErrorComponent } from './server-error/server-error.component';
+import { ErrorInterceptor } from './core/interceptors/ErrorInterceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { JwtInterceptor } from './interceptors/JWTInterceptor';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtInterceptor } from './core/interceptors/JWTInterceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderComponent } from './order/order.component';
-import { ThankyouComponent } from './thankyou/thankyou.component';
+import { CoreModule } from './core/core.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    NotfoundComponent,
-    ServerErrorComponent,
-    OrderComponent,
-    ThankyouComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
+    CoreModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

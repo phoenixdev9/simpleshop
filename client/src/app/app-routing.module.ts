@@ -1,17 +1,17 @@
-import { ThankyouComponent } from './thankyou/thankyou.component';
-import { OrderComponent } from './order/order.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { AuthGuardGuard } from './_guard/auth-guard.guard';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { ServerErrorComponent } from './server-error/server-error.component';
-import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
-import { ShopComponent } from './shop/shop.component';
+import { ThankyouComponent } from './core/thankyou/thankyou.component';
+import { AuthGuardGuard } from './core/_guard/auth-guard.guard';
+import { NotfoundComponent } from './core/notfound/notfound.component';
+import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
   _client_account,
   _client_checkout_,
+  _client_notfound_,
+  _client_order_,
+  _client_servererror_,
   _client_shop_,
+  _client_thankyou_,
 } from './shared/_constVars/_client_consts';
 
 const routes: Routes = [
@@ -26,15 +26,15 @@ const routes: Routes = [
       import('./account/account.module').then((m) => m.AccountModule),
   },
   {
-    path: 'server-error',
+    path: _client_servererror_,
     component: ServerErrorComponent,
   },
   {
-    path: 'not-found',
+    path: _client_notfound_,
     component: NotfoundComponent,
   },
   {
-    path: 'thankyou',
+    path: _client_thankyou_,
     component: ThankyouComponent,
   },
   {
@@ -44,15 +44,10 @@ const routes: Routes = [
       import('./checkout/checkout.module').then((m) => m.CheckoutModule),
   },
   {
-    path: '',
-    runGuardsAndResolvers: 'always',
+    path: _client_order_,
     canActivate: [AuthGuardGuard],
-    children: [
-      {
-        path: 'order',
-        component: OrderComponent,
-      },
-    ],
+    loadChildren: () =>
+      import('./order/order.module').then((m) => m.OrderModule),
   },
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];

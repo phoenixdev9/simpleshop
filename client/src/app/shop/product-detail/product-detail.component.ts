@@ -2,12 +2,12 @@ import { _client_checkout_ } from '../../shared/_constVars/_client_consts';
 import {
   _checkItemExistsInCart,
   _findItemExistsInCart,
-} from './../../_utils/_checkItemExistsInCart';
-import { ProductsService } from './../../_services/products.service';
+} from '../../shared/_helper/_checkItemExistsInCart';
+import { ProductsService } from '../../core/_services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/shared/_models/IProduct';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BasketService } from 'src/app/_services/basket.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 
 @Component({
   selector: 'app-product-detail',

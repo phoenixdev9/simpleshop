@@ -1,6 +1,6 @@
-import { BasketService } from 'src/app/_services/basket.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 import { ShopParams } from '../shared/_models/ShopParams';
-import { ProductsService } from './../_services/products.service';
+import { ProductsService } from '../core/_services/products.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/_models/IProduct';
 import { IBrand } from '../shared/_models/IBrand';

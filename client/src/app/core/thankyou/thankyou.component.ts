@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { _client_order } from '../shared/_constVars/_client_consts';
+import { _client_order_ } from '../../shared/_constVars/_client_consts';
 
 @Component({
   selector: 'app-thankyou',
@@ -7,7 +7,7 @@ import { _client_order } from '../shared/_constVars/_client_consts';
   styleUrls: ['./thankyou.component.scss'],
 })
 export class ThankyouComponent implements OnInit {
-  order: string = _client_order;
+  order: string = `/${_client_order_}/`;
   constructor() {}
 
   ngOnInit(): void {}

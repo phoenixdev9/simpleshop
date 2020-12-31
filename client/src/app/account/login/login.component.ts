@@ -1,12 +1,9 @@
-import { BasketService } from 'src/app/_services/basket.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 import { _client_home } from '../../shared/_constVars/_client_consts';
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../_services/account.service';
+import { AccountService } from '../../core/_services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  _client_notfound,
-  _client_signup,
-} from '../../shared/_constVars/_client_consts';
+import { _client_signup } from '../../shared/_constVars/_client_consts';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

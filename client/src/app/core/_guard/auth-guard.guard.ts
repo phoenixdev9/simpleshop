@@ -1,7 +1,7 @@
 import {
   _client_account,
   _client_signin,
-} from '../shared/_constVars/_client_consts';
+} from '../../shared/_constVars/_client_consts';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,

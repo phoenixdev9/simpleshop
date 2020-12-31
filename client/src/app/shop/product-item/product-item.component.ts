@@ -1,7 +1,7 @@
-import { _checkItemExistsInCart } from './../../_utils/_checkItemExistsInCart';
+import { _checkItemExistsInCart } from '../../shared/_helper/_checkItemExistsInCart';
 import { Component, OnInit, Input } from '@angular/core';
 import { IProduct } from 'src/app/shared/_models/IProduct';
-import { BasketService } from 'src/app/_services/basket.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 import { Observable } from 'rxjs';
 import { IBasketItem, IBasket } from 'src/app/shared/_models/IBasket';
 import { _client_shop_ } from 'src/app/shared/_constVars/_client_consts';
@@ -51,7 +51,7 @@ export class ProductItemComponent implements OnInit {
           this.isContains = false;
         }
       },
-      (err) => console.log('err', err)
+      (err) => console.log(err)
     );
   }
 }

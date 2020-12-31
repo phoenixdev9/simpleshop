@@ -2,8 +2,8 @@ import { IAddress } from '../../shared/_models/IAddress';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/_services/account.service';
-import { BasketService } from 'src/app/_services/basket.service';
+import { AccountService } from 'src/app/core/_services/account.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 import { Observable } from 'rxjs';
 import { IBasket } from 'src/app/shared/_models/IBasket';
 
@@ -45,7 +45,7 @@ export class AddressComponent implements OnInit {
   getUserAddress() {
     this.as.getUserAddress().subscribe(
       (e: IAddress) => this.setupForm(e),
-      (err) => console.log('err', err)
+      (err) => console.log(err)
     );
   }
   submitFunc() {

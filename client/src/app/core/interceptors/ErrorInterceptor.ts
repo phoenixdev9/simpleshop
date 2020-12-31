@@ -1,7 +1,7 @@
 import {
-  _client_notfound,
-  _client_servererror,
-} from '../shared/_constVars/_client_consts';
+  _client_notfound_,
+  _client_servererror_,
+} from '../../shared/_constVars/_client_consts';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -12,7 +12,7 @@ import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { _client_signin } from '../shared/_constVars/_client_consts';
+import { _client_signin } from '../../shared/_constVars/_client_consts';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -37,13 +37,13 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }
           if (error.status === 404) {
-            this.router.navigate([_client_notfound]);
+            this.router.navigate([`/${_client_notfound_}/`]);
           }
           if (error.status === 401) {
             alert(`You are not authorized, please log in.`);
           }
           if (error.status === 500) {
-            this.router.navigate([_client_servererror]);
+            this.router.navigate([`/${_client_servererror_}/`]);
           }
         }
         return throwError(error);

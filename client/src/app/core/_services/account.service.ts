@@ -1,19 +1,19 @@
-import { ILogin, ISignup } from '../shared/_models/IAuthForm';
+import { ILogin, ISignup } from '../../shared/_models/IAuthForm';
 import {
   _api_account,
   _api_login,
   _api_signup,
   _api_address,
-} from '../shared/_constVars/_api_consts';
+} from '../../shared/_constVars/_api_consts';
 import { Injectable } from '@angular/core';
-import { _api_default } from '../shared/_constVars/_api_consts';
+import { _api_default } from '../../shared/_constVars/_api_consts';
 import { BehaviorSubject } from 'rxjs';
-import { IUser } from '../shared/_models/IUser';
+import { IUser } from '../../shared/_models/IUser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { IAddress } from '../shared/_models/IAddress';
-import { _client_home } from '../shared/_constVars/_client_consts';
+import { IAddress } from '../../shared/_models/IAddress';
+import { _client_home } from '../../shared/_constVars/_client_consts';
 
 @Injectable({
   providedIn: 'root',

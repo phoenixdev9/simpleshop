@@ -1,10 +1,8 @@
-import { BasketService } from 'src/app/_services/basket.service';
+import { BasketService } from 'src/app/core/_services/basket.service';
 import { Router } from '@angular/router';
-import { OrderService } from './../_services/order.service';
-import { Observable } from 'rxjs';
+import { OrderService } from '../core/_services/order.service';
 import { Component, OnInit } from '@angular/core';
-import { IBasketItem, IBasket } from '../shared/_models/IBasket';
-import { _client_thankyou } from '../shared/_constVars/_client_consts';
+import { _client_thankyou_ } from '../shared/_constVars/_client_consts';
 
 @Component({
   selector: 'app-checkout',
@@ -24,7 +22,7 @@ export class CheckoutComponent implements OnInit {
       () => {
         this.bs.clearBasket().subscribe(
           () => {
-            this.router.navigate([_client_thankyou]);
+            this.router.navigate([`/${_client_thankyou_}/`]);
           },
           (err) => console.log(err)
         );

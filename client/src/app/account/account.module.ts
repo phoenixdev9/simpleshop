@@ -7,7 +7,6 @@ import {
   _client_signup,
 } from '../shared/_constVars/_client_consts';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 const routes = [

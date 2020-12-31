@@ -1,4 +1,4 @@
-import { IBasketItem } from '../shared/_models/IBasket';
+import { IBasketItem } from '../_models/IBasket';
 
 export const _checkItemExistsInCart = (b: IBasketItem[], productId: string) => {
   if (b.some((e: IBasketItem) => e.productId === productId)) {
