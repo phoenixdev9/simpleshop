@@ -1,7 +1,7 @@
-import { IOrder } from './../_models/IOrder';
-import { _api_order } from './../_constVars/_api_consts';
+import { IOrder } from '../shared/_models/IOrder';
+import { _api_order } from '../shared/_constVars/_api_consts';
 import { Injectable } from '@angular/core';
-import { _api_default, _api_account } from '../_constVars/_api_consts';
+import { _api_default, _api_account } from '../shared/_constVars/_api_consts';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',

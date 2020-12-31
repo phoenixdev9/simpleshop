@@ -1,10 +1,10 @@
 import { _checkItemExistsInCart } from './../../_utils/_checkItemExistsInCart';
 import { Component, OnInit, Input } from '@angular/core';
-import { IProduct } from 'src/app/_models/IProduct';
+import { IProduct } from 'src/app/shared/_models/IProduct';
 import { BasketService } from 'src/app/_services/basket.service';
 import { Observable } from 'rxjs';
-import { IBasketItem, IBasket } from 'src/app/_models/IBasket';
-import { _client_shop_ } from 'src/app/_constVars/_client_consts';
+import { IBasketItem, IBasket } from 'src/app/shared/_models/IBasket';
+import { _client_shop_ } from 'src/app/shared/_constVars/_client_consts';
 
 @Component({
   selector: 'app-product-item',

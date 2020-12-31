@@ -1,7 +1,7 @@
 import {
   _client_notfound,
   _client_servererror,
-} from './../_constVars/_client_consts';
+} from '../shared/_constVars/_client_consts';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -12,7 +12,7 @@ import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { _client_signin } from '../_constVars/_client_consts';
+import { _client_signin } from '../shared/_constVars/_client_consts';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

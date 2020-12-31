@@ -8,7 +8,11 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { ShopComponent } from './shop/shop.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { _client_account, _client_shop_ } from './_constVars/_client_consts';
+import {
+  _client_account,
+  _client_checkout_,
+  _client_shop_,
+} from './shared/_constVars/_client_consts';
 
 const routes: Routes = [
   { path: '', redirectTo: _client_shop_, pathMatch: 'full' },
@@ -34,14 +38,16 @@ const routes: Routes = [
     component: ThankyouComponent,
   },
   {
+    path: _client_checkout_,
+    canActivate: [AuthGuardGuard],
+    loadChildren: () =>
+      import('./checkout/checkout.module').then((m) => m.CheckoutModule),
+  },
+  {
     path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuardGuard],
     children: [
-      {
-        path: 'checkout',
-        component: CheckoutComponent,
-      },
       {
         path: 'order',
         component: OrderComponent,

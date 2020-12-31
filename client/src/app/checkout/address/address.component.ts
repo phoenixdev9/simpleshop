@@ -1,11 +1,11 @@
-import { IAddress } from './../../_models/IAddress';
+import { IAddress } from '../../shared/_models/IAddress';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { BasketService } from 'src/app/_services/basket.service';
 import { Observable } from 'rxjs';
-import { IBasket } from 'src/app/_models/IBasket';
+import { IBasket } from 'src/app/shared/_models/IBasket';
 
 @Component({
   selector: 'app-address',

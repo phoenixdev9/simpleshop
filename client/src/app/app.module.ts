@@ -12,10 +12,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { JwtInterceptor } from './interceptors/JWTInterceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
-import { CartComponent } from './checkout/cart/cart.component';
-import { AddressComponent } from './checkout/address/address.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 @NgModule({
   declarations: [
@@ -23,10 +20,7 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     NavbarComponent,
     NotfoundComponent,
     ServerErrorComponent,
-    CheckoutComponent,
     OrderComponent,
-    CartComponent,
-    AddressComponent,
     ThankyouComponent,
   ],
   imports: [

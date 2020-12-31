@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { _client_order } from '../_constVars/_client_consts';
+import { _client_order } from '../shared/_constVars/_client_consts';
 
 @Component({
   selector: 'app-thankyou',

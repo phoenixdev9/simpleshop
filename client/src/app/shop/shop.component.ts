@@ -1,10 +1,10 @@
 import { BasketService } from 'src/app/_services/basket.service';
-import { ShopParams } from '../_models/ShopParams';
+import { ShopParams } from '../shared/_models/ShopParams';
 import { ProductsService } from './../_services/products.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { IProduct } from '../_models/IProduct';
-import { IBrand } from '../_models/IBrand';
-import { IType } from '../_models/IType';
+import { IProduct } from '../shared/_models/IProduct';
+import { IBrand } from '../shared/_models/IBrand';
+import { IType } from '../shared/_models/IType';
 
 @Component({
   selector: 'app-shop',

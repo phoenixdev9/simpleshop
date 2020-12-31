@@ -1,4 +1,4 @@
-import { ShopParams } from './../_models/ShopParams';
+import { ShopParams } from '../_models/ShopParams';
 import { HttpParams } from '@angular/common/http';
 
 export const _paramsAppend = (paramsData?: ShopParams) => {

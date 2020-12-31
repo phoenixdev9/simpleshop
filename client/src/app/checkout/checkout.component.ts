@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { OrderService } from './../_services/order.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { IBasketItem, IBasket } from '../_models/IBasket';
-import { _client_thankyou } from '../_constVars/_client_consts';
+import { IBasketItem, IBasket } from '../shared/_models/IBasket';
+import { _client_thankyou } from '../shared/_constVars/_client_consts';
 
 @Component({
   selector: 'app-checkout',

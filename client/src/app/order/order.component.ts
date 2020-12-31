@@ -1,4 +1,4 @@
-import { IOrder } from './../_models/IOrder';
+import { IOrder } from '../shared/_models/IOrder';
 import { OrderService } from './../_services/order.service';
 import { Component, OnInit } from '@angular/core';
 

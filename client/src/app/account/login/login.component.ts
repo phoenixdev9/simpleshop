@@ -1,12 +1,12 @@
 import { BasketService } from 'src/app/_services/basket.service';
-import { _client_home } from '../../_constVars/_client_consts';
+import { _client_home } from '../../shared/_constVars/_client_consts';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../_services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   _client_notfound,
   _client_signup,
-} from '../../_constVars/_client_consts';
+} from '../../shared/_constVars/_client_consts';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

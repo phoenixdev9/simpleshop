@@ -1,5 +1,5 @@
-import { IAddBasket, IBasket } from './../_models/IBasket';
-import { _api_default, _api_basket } from './../_constVars/_api_consts';
+import { IAddBasket, IBasket } from '../shared/_models/IBasket';
+import { _api_default, _api_basket } from '../shared/_constVars/_api_consts';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';

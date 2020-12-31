@@ -1,20 +1,20 @@
-import { IPagination, PaginatedResult } from './../_models/IPagination';
-import { ShopParams } from '../_models/ShopParams';
+import { IPagination, PaginatedResult } from '../shared/_models/IPagination';
+import { ShopParams } from '../shared/_models/ShopParams';
 import {
   _api_default,
   _api_products,
   _api_brands,
   _api_types,
-} from './../_constVars/_api_consts';
-import { _getPagination } from './../_helper/_getPagination';
-import { IProduct } from './../_models/IProduct';
+} from '../shared/_constVars/_api_consts';
+import { _getPagination } from '../shared/_helper/_getPagination';
+import { IProduct } from '../shared/_models/IProduct';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { _paramsAppend } from '../_helper/_paramsAppend';
+import { _paramsAppend } from '../shared/_helper/_paramsAppend';
 import { map } from 'rxjs/operators';
-import { IBrand } from '../_models/IBrand';
-import { IType } from '../_models/IType';
+import { IBrand } from '../shared/_models/IBrand';
+import { IType } from '../shared/_models/IType';
 import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root',

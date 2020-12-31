@@ -1,11 +1,11 @@
-import { _client_checkout } from './../../_constVars/_client_consts';
+import { _client_checkout_ } from '../../shared/_constVars/_client_consts';
 import {
   _checkItemExistsInCart,
   _findItemExistsInCart,
 } from './../../_utils/_checkItemExistsInCart';
 import { ProductsService } from './../../_services/products.service';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'src/app/_models/IProduct';
+import { IProduct } from 'src/app/shared/_models/IProduct';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasketService } from 'src/app/_services/basket.service';
 
@@ -28,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
       .editBasket({ ProductId: id, Quantity: this.quantity })
       .subscribe(
         () => {
-          this.router.navigate([_client_checkout]);
+          this.router.navigate([`/${_client_checkout_}/`]);
         },
         (err) => console.log(err)
       );
