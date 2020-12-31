@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { _client_signin, _client_signup } from '../_constVars/_client_consts';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 const routes = [
   { path: _client_signin, component: LoginComponent },
@@ -12,11 +13,6 @@ const routes = [
 ];
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
 })
 export class AccountModule {}

@@ -8,11 +8,14 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { ShopComponent } from './shop/shop.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { _client_account } from './_constVars/_client_consts';
+import { _client_account, _client_shop_ } from './_constVars/_client_consts';
 
 const routes: Routes = [
-  { path: '', component: ShopComponent },
-  { path: 'shop/:id', component: ProductDetailComponent },
+  { path: '', redirectTo: _client_shop_, pathMatch: 'full' },
+  {
+    path: _client_shop_,
+    loadChildren: () => import('./shop/shop.module').then((m) => m.ShopModule),
+  },
   {
     path: _client_account,
     loadChildren: () =>
