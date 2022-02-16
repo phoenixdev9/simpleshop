@@ -4,7 +4,7 @@
 
 ## URL
 
-[YouTube App Demo](https://youtu.be/gEsedj6M_w8)
+[YouTube App Demo](https://www.youtube.com/watch?v=TJIhw7Ci5a8)
 
 ## Setup & Run App
 
